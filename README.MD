@@ -4,11 +4,17 @@
 
 	composer require arquivei/laravel-health-check
 
+##### For Laravel <= 5.4
+
 Add the `\Laravel\Health\Providers\HealthServiceProvider::class,` to your `providers` section in `config/app.php`.
 
 Add the `'HealthChecker' => Laravel\Health\Facades\HealthFacade::class,` to your `alias` section in `config/app.php`.
 
 	php artisan vendor:publish --provider "Laravel\Health\Providers\HealthServiceProvider"
+
+##### For Laravel >= 5.5
+
+Add the `'HealthChecker' => Laravel\Health\Facades\HealthFacade::class,` to your `alias` section in `config/app.php`.
 
 ## Usage
 Edit the config file `config/health-checker.php` see the comments there for more information
