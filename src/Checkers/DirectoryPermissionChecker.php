@@ -11,7 +11,7 @@ class DirectoryPermissionChecker extends BaseChecker
     {
         try {
             foreach ($this->resources['dirs'] as $directory) {
-                $dir =  getcwd()."/../".$directory;
+                $dir =  getcwd() . '/' . $directory;
                 if (!is_writable($dir)) {
                     throw new NotWriteableException($dir, $this->resources['messages']['error']);
                 }
