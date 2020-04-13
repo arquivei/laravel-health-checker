@@ -13,7 +13,6 @@ return [
         'database' => \Laravel\Health\Checkers\DatabaseChecker::class,
         'directory-permission' => \Laravel\Health\Checkers\DirectoryPermissionChecker::class,
         'queue' => \Laravel\Health\Checkers\QueueChecker::class,
-        'storage-aws' => \Laravel\Health\Checkers\StorageChecker::class,
     ],
     /*
      * ====================================================
@@ -50,11 +49,5 @@ return [
             'connection' => '',
             'error' => 'Queue system is not working.'
         ],
-        'storage-aws' => [
-            'driver' => 's3',
-            'filename' => 'health-checker-file.json',
-            'contents' => str_random(),
-            'error_message' => 'Amazon S3 connection failure'
-        ]
     ]
 ];
