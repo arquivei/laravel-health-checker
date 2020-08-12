@@ -4,7 +4,8 @@ namespace Laravel\Health\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Health\HealthManager;
-use Laravel\Health\Commands\HealthCommand;
+use Laravel\Health\Commands\CheckHealthCommand;
+use Laravel\Health\Commands\HealthCheckCommand;
 
 class HealthServiceProvider extends ServiceProvider
 {
@@ -15,7 +16,8 @@ class HealthServiceProvider extends ServiceProvider
         $this->loadRoutesFromRootFile();
 
         $this->commands([
-            HealthCommand::class
+            CheckHealthCommand::class,
+            HealthCheckCommand::class
         ]);
 
         $this->app->bind('laravel-health-checker', function (){
