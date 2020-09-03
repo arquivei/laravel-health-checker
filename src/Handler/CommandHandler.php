@@ -1,16 +1,12 @@
 <?php
 
-namespace Laravel\Health\Commands;
+namespace Laravel\Health\Handler;
 
-use Illuminate\Console\Command;
 use Laravel\Health\HealthManager;
 
-class HealthCommand extends Command
+class CommandHandler
 {
-    protected $signature = 'application-health:check-health';
-    protected $description = 'Command to check application health';
-
-    public function handle()
+    public static function handle(): void
     {
         $healthStatus = (new HealthManager())->eagerLoader(config('health-checker'))
             ->getHealthStatus();
@@ -21,4 +17,5 @@ class HealthCommand extends Command
             }
         }
     }
+
 }
