@@ -21,7 +21,7 @@ You only need to extent `\Laravel\Health\Checkers\BaseChecker` and add to servic
 To access the health status you can use the follow routes:
 
 - `health/status` Load and list all check services.
-- `health\{service_name}\status` Load only the chosen service and show his status. 
+- `health/{service_name}/status` Load only the chosen service and show his status. 
 
 The response for both cases will be like that:
 
@@ -62,4 +62,13 @@ The response for both cases will be like that:
 
 ## Command usage
 
-You can use de command `application-health:check-health` to check health in your cli application
+You can use the follow commands to check healthy in your cli application:
+
+```sh
+php artisan application-health:check-health
+```
+Or
+
+```sh
+php artisan application:health-check
+```
