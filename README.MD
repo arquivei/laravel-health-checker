@@ -1,5 +1,12 @@
 # Laravel Health Check
 
+## Version Compatibility
+
+ Releases | Laravel
+:---------|:--------
+ 1.x      | ^5.7
+ 2.x      | ^7.15
+
 ## Install
 
     composer require arquivei/laravel-health-checker
