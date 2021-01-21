@@ -1,0 +1,52 @@
+name: Build
+
+on:
+  pull_request:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        php: [7.3, 7.4]
+    runs-on: ubuntu-latest
+    container: arquivei/php:${{ matrix.php }}-cli-debian
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache composer bin
+        id: cache-composer-bin
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/bin/composer.phar
+          key: ${{ runner.os }}-composer-bin
+
+      - name: Generate composer bin
+        if: steps.cache-composer-bin.outputs.cache-hit != 'true'
+        run: mkdir -p ~/.local/bin/ && curl https://getcomposer.org/download/1.10.15/composer.phar -o ~/.local/bin/composer.phar -LR -z ~/.local/bin/composer.phar
+
+      - name: Move composer bin
+        run: cp ~/.local/bin/composer.phar /usr/local/bin/composer && chmod +x /usr/local/bin/composer
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+      - name: Install composer dependencies
+        run: composer install
+
+      - name: Run checks
+        run: php vendor/bin/phpunit
+
+      - name: Run checks in lower versions
+        run: |
+          composer update --prefer-lowest --prefer-dist --prefer-stable --no-interaction
+          php vendor/bin/phpunit
