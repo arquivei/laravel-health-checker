@@ -5,7 +5,7 @@
  Releases | Laravel
 :---------|:--------
  1.x      | ^5.7
- 2.x      | ^7.15
+ 2.x      | ^7.30.3 \|\| ^8.22.1
 
 ## Install
 
@@ -81,3 +81,17 @@ Or
 ```sh
 php artisan application:health-check
 ```
+
+## Development
+
+We provide docker images to help set up the development environment. 
+So, in order to build the images, install the dependencies and run the
+tests, you may execute the command:
+
+```shell
+make
+```
+
+After the initial setup you can use the `bin/php` and `bin/composer` 
+scripts (wrappers for the docker images) to run the tests and install
+new dependencies.
