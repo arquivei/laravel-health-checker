@@ -18,3 +18,7 @@ vendor:
 .PHONY: tests
 tests:
 	$(PHP) vendor/bin/phpunit
+
+.PHONY: coverage
+coverage:
+	$(PHP) vendor/bin/phpunit --coverage-html cover
