@@ -3,6 +3,7 @@
 namespace Laravel\Health\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Laravel\Health\Commands\ReadyCheckCommand;
 use Laravel\Health\HealthManager;
 use Laravel\Health\Commands\CheckHealthCommand;
 use Laravel\Health\Commands\HealthCheckCommand;
@@ -17,7 +18,8 @@ class HealthServiceProvider extends ServiceProvider
 
         $this->commands([
             CheckHealthCommand::class,
-            HealthCheckCommand::class
+            HealthCheckCommand::class,
+            ReadyCheckCommand::class
         ]);
 
         $this->app->bind('laravel-health-checker', function (){
