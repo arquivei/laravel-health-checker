@@ -1,4 +1,4 @@
-ARG PHPVERSION="7.3"
+ARG PHPVERSION="8.0"
 
 FROM arquivei/php:${PHPVERSION}-cli-debian
 WORKDIR /application

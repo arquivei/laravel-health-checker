@@ -9,7 +9,8 @@ jobs:
   build:
     strategy:
       matrix:
-        php: ["7.3", "7.4", "8.0"]
+        php: [ "8.0", "8.1" ]
+        composer: [ "2.2.7" ]
     runs-on: ubuntu-latest
     container: arquivei/php:${{ matrix.php }}-cli-debian
     steps:
@@ -20,11 +21,11 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.local/bin/composer.phar
-          key: ${{ runner.os }}-composer-bin
+          key: ${{ runner.os }}-${{ matrix.composer }}-composer-bin
 
       - name: Generate composer bin
         if: steps.cache-composer-bin.outputs.cache-hit != 'true'
-        run: mkdir -p ~/.local/bin/ && curl https://getcomposer.org/download/1.10.15/composer.phar -o ~/.local/bin/composer.phar -LR -z ~/.local/bin/composer.phar
+        run: mkdir -p ~/.local/bin/ && curl https://getcomposer.org/download/${{ matrix.composer }}/composer.phar -o ~/.local/bin/composer.phar -LR -z ~/.local/bin/composer.phar
 
       - name: Move composer bin
         run: cp ~/.local/bin/composer.phar /usr/local/bin/composer && chmod +x /usr/local/bin/composer
@@ -33,6 +34,7 @@ jobs:
         id: composer-cache
         run: |
           echo "::set-output name=dir::$(composer config cache-files-dir)"
+
       - name: Cache composer dependencies
         uses: actions/cache@v2
         with:
@@ -40,6 +42,7 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-composer-
+
       - name: Install composer dependencies
         run: composer install
 

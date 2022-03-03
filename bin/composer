@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION=${PHPVERSION:-7.3}
+VERSION=${PHPVERSION:-8.0}
 
 set -e
 
@@ -20,4 +20,3 @@ exec docker run ${DOCKER_OPTS} --rm \
     --net=host --sig-proxy=true --pid=host \
     --entrypoint="composer" \
      laravel-health-checker:${VERSION} "${@}"
-
