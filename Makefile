@@ -1,4 +1,4 @@
-PHPVERSION ?= 7.3
+PHPVERSION ?= 8.0
 PHP ?= PHPVERSION=$(PHPVERSION) bin/php
 COMPOSER ?= PHPVERSION=$(PHPVERSION) bin/composer
 
@@ -7,9 +7,8 @@ setup: container vendor tests
 
 .PHONY: container
 container:
-	docker build -t laravel-health-checker:7.3 --build-arg PHPVERSION=7.3 .docker/
-	docker build -t laravel-health-checker:7.4 --build-arg PHPVERSION=7.4 .docker/
 	docker build -t laravel-health-checker:8.0 --build-arg PHPVERSION=8.0 .docker/
+	docker build -t laravel-health-checker:8.1 --build-arg PHPVERSION=8.1 .docker/
 
 .PHONY: vendor
 vendor:
