@@ -7,12 +7,22 @@
 | 1.x      | ^5.7             |
 | 2.x      | ^7.30.3; ^8.22.1 |
 | 3.x      | ^8.22.1; ^9.3.0  |
+| 4.x      | ^8.22.1; ^10.0   |
 
 ## Install
 
+### Install via composer
+Run the following command:
 ```shell script
 composer require arquivei/laravel-health-checker
 ```
+
+### Publish the config
+Run the following command:
+```bash
+  php artisan vendor:publish --provider="Laravel\Health\Providers\HealthServiceProvider"
+```
+You should now have a `config/health-checker.php`.
 
 ## Usage
 Edit the config file `config/health-checker.php` see the comments there for more information
