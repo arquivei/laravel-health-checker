@@ -7,6 +7,7 @@
 | 1.x      | ^5.7             |
 | 2.x      | ^7.30.3; ^8.22.1 |
 | 3.x      | ^8.22.1; ^9.3.0  |
+| 4.x      | ^10.0            |
 
 ## Install
 
@@ -31,7 +32,7 @@ You only need to extent `\Laravel\Health\Checkers\BaseChecker` and add to servic
 To access the health status you can use the follow routes:
 
 - `health/status` Load and list all check services.
-- `health/{service_name}/status` Load only the chosen service and show his status. 
+- `health/{service_name}/status` Load only the chosen service and show his status.
 
 The response for both cases will be like that:
 
@@ -85,7 +86,7 @@ php artisan application:health-check
 
 ## Development
 
-We provide docker images to help set up the development environment. 
+We provide docker images to help set up the development environment.
 So, in order to build the images, install the dependencies and run the
 tests, you may execute the command:
 
@@ -93,6 +94,6 @@ tests, you may execute the command:
 make
 ```
 
-After the initial setup you can use the `bin/php` and `bin/composer` 
+After the initial setup you can use the `bin/php` and `bin/composer`
 scripts (wrappers for the docker images) to run the tests and install
 new dependencies.
