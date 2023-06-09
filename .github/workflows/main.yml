@@ -9,10 +9,10 @@ jobs:
   build:
     strategy:
       matrix:
-        php: [ "8.0", "8.1" ]
+        php: [ "8.2"]
         composer: [ "2.2.7" ]
     runs-on: ubuntu-latest
-    container: arquivei/php:${{ matrix.php }}-cli-debian
+    container: php:${{ matrix.php }}-cli
     steps:
       - uses: actions/checkout@v2
 
@@ -42,6 +42,9 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-composer-
+
+      - name: Install ubuntu dependencies
+        run: apt-get update --allow-releaseinfo-change && apt-get install -y libzip-dev unzip git
 
       - name: Install composer dependencies
         run: composer install
