@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-VERSION=${PHPVERSION:-8.0}
+PROJECT_DIR=$(dirname $0)'/../'
+set -a; source "${PROJECT_DIR}.env.dist"; set +a
+
+VERSION=${PHPVERSION:-8.2}
 
 set -e
 
