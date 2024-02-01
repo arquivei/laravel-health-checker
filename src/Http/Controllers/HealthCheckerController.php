@@ -9,7 +9,7 @@ class HealthCheckerController
     public function index()
     {
         try {
-            $healthManager = \HealthChecker::eagerLoader(config('health-checker'))
+            $healthManager = \HealthChecker::eagerLoader(config('health-checker') ?: [])
                 ->getHealthStatus();
 
             return response()->json([
@@ -34,7 +34,7 @@ class HealthCheckerController
     {
         try {
 
-            $healthManager = \HealthChecker::oneLoader(config('health-checker'), $checker)
+            $healthManager = \HealthChecker::oneLoader(config('health-checker') ?: [], $checker)
                 ->getHealthStatus();
 
             return response()->json([

@@ -8,7 +8,7 @@ class CommandHandler
 {
     public static function handle(): void
     {
-        $healthStatus = (new HealthManager())->eagerLoader(config('health-checker'))
+        $healthStatus = (new HealthManager())->eagerLoader(config('health-checker') ?: [])
             ->getHealthStatus();
 
         foreach ($healthStatus as $status) {
